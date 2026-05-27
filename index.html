@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>CS Elective 1 : Geometric Modelling</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/Logo.png" rel="icon">
+  <link href="assets/img/Logo.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       GLightbox Custom Skin — Clean Minimal Dark
+    ============================================================ */
+
+    /* Overlay backdrop */
+    .glightbox-clean .goverlay {
+      background: rgba(5, 5, 8, 0.96);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    /* Slide wrapper */
+    .glightbox-clean .gslide {
+      max-width: 900px;
+      width: 90vw;
+      margin: 0 auto;
+    }
+
+    /* Image */
+    .glightbox-clean .gslide-image img {
+      border-radius: 6px 6px 0 0;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 20px 60px rgba(0,0,0,0.7);
+      max-height: 72vh;
+      object-fit: contain;
+      width: 100%;
+      display: block;
+    }
+
+    /* Description panel */
+    .glightbox-clean .gslide-description {
+      background: rgba(14, 14, 20, 0.97);
+      border-top: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 0 0 6px 6px;
+      padding: 16px 22px 14px;
+    }
+
+    .glightbox-clean .gslide-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 5px 0;
+      letter-spacing: 0.03em;
+    }
+
+    .glightbox-clean .gslide-desc {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      color: rgba(16, 185, 129, 0.85);
+      margin: 0;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Nav arrows */
+    .glightbox-clean .gnext,
+    .glightbox-clean .gprev {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .glightbox-clean .gnext:hover,
+    .glightbox-clean .gprev:hover {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.5);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .glightbox-clean .gnext svg,
+    .glightbox-clean .gprev svg {
+      width: 18px;
+      height: 18px;
+      stroke: #ffffff;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .glightbox-clean .gnext { right: 18px; }
+    .glightbox-clean .gprev { left: 18px; }
+
+    /* Close button */
+    .glightbox-clean .gclose {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 16px;
+      right: 16px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .glightbox-clean .gclose:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .glightbox-clean .gclose svg {
+      width: 16px;
+      height: 16px;
+      stroke: #ffffff;
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    /* Loader */
+    .glightbox-clean .gloader {
+      border-color: rgba(16, 185, 129, 0.6) transparent rgba(16, 185, 129, 0.6) transparent;
+    }
+
+    @media (max-width: 768px) {
+      .glightbox-clean .gnext { right: 6px; }
+      .glightbox-clean .gprev { left: 6px; }
+      .glightbox-clean .gnext,
+      .glightbox-clean .gprev { width: 38px; height: 38px; }
+      .glightbox-clean .gslide-image img { max-height: 60vh; }
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header dark-background d-flex flex-column">
+    <i class="header-toggle d-xl-none bi bi-list"></i>
+
+    <div class="profile-img">
+      <img src="assets/img/pfp.jpg" alt="" class="img-fluid rounded-circle">
+    </div>
+
+    <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+      <h1 class="sitename">Mark Agagad</h1>
+    </a>
+
+    <div class="social-links text-center">
+      <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
+        <li><a href="#testimonials"><i class="bi bi-person-badge navicon"></i> Instructor</a></li>
+        <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+      <img src="assets/img/front.jpg" alt="" data-aos="fade-in">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <h2>𝑴𝒂𝒓𝒌 𝑳𝒂𝒖𝒓𝒆𝒏𝒄𝒆 𝑳. 𝑨𝒈𝒂𝒈𝒂𝒅</h2>
+        <p>𝑴𝒚 𝒘𝒐𝒓𝒌 <span class="" data-typed-items=""></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>QUOTE</h2>
+        <p>There are no secrets to success. It is the result of preparation, hard work, and learning from failure.</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
+            <img src="assets/img/pfp.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-8 content">
+            <h2>MABINI STUDENT</h2>
+            <p class="fst-italic py-3">Push yourself, because no one else is going to do it for you.</p>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>7 March 2006</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.blah.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+000 000 0000</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Daet</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>19</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Experience:</strong> <span>Beginner</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>email@markagagad123.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Commission:</strong> <span>Available</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="py-3">
+              The duties of choosing, therefore, involve effort and hardship, but also real opportunities. Some people seek to gain everything and avoid responsibility. There is no pain without blame in due time. And everything belongs to him. Desire leads to declarations of maximum responsibility, especially because of this. It is said that those who are concerned with justice are repelled by injustice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-emoji-smile"></i>
+              <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Happy Clients</strong></p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-journal-richtext"></i>
+              <span data-purecounter-start="0" data-purecounter-end="1000000000" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Projects</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Skills</h2>
+        <p>CHAOS!</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row skills-content skills-animation">
+          <div class="col-lg-6">
+            <div class="progress">
+              <span class="skill"><span>JAVA</span> <i class="val">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="progress">
+              <span class="skill"><span>CSS</span> <i class="val">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="progress">
+              <span class="skill"><span>HTML</span> <i class="val">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="progress">
+              <span class="skill"><span>ILLUSTRATOR</span> <i class="val">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="progress">
+              <span class="skill"><span>PHOTOSHOP</span> <i class="val">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="progress">
+              <span class="skill"><span>JAVASCRIPT</span> <i class="val">100%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instructor / Testimonials Section -->
+    <section id="testimonials" class="testimonials section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>MAJOR</h2>
+        <p>AS 102 : Image Processing using Raster Graphics Editor</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config"></script>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>OVER RATED</p>
+                <div class="profile mt-auto">
+                  <img src="assets/img/person/sir.jpg" class="testimonial-img" alt="">
+                  <h3>Sir Rainell John Abanto</h3>
+                  <h4>MY INSTRUCTOR</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         PORTFOLIO — 2nd Year, Second Semester
+    ======================================================== -->
+    <section id="portfolio" class="portfolio section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Portfolio</h2>
+      </div>
+      <div class="container section-title text-center" data-aos="fade-up">
+        <h1>2𝒏𝒅 𝒚𝒆𝒂𝒓</h1>
+        <h1>𝑺𝒆𝒄𝒐𝒏𝒅 𝑺𝒆𝒎𝒆𝒔𝒕𝒆𝒓</h1>
+      </div>
+
+      <div class="container">
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">ALL</li>
+            <li data-filter=".filter-prelim">PRE-LIM</li>
+            <li data-filter=".filter-midterm">MIDTERM</li>
+            <li data-filter=".filter-prefi">PRE-FINAL</li>
+            <li data-filter=".filter-final">FINAL</li>
+          </ul>
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 101 (Shapes and Forms 101).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 101</h4>
+                  <p>Shapes and Forms 101</p>
+                  <a href="assets/img/portfolio/premid/Activity 101 (Shapes and Forms 101).jpg"
+                     title="Activity 101"
+                     data-description="Shapes and Forms 101"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 104 (Draw a Modern House ).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 104</h4>
+                  <p>Draw a Modern House</p>
+                  <a href="assets/img/portfolio/midterm/Activity 104 (Draw a Modern House ).jpg"
+                     title="Activity 104"
+                     data-description="Draw a Modern House"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/prefi/Activity 105  Tinkercad (Your own Building).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 105</h4>
+                  <p>Tinkercad — Your own Building</p>
+                  <a href="assets/img/portfolio/prefi/Activity 105  Tinkercad (Your own Building).jpg"
+                     title="Activity 105"
+                     data-description="Tinkercad — Your own Building"
+                     data-gallery="portfolio-gallery-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 1</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 1.jpg"
+                     title="Tinkercad 1"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 101 (Shapes and Forms 101)1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 101</h4>
+                  <p>Shapes and Forms 101 — Variation 2</p>
+                  <a href="assets/img/portfolio/premid/Activity 101 (Shapes and Forms 101)1.jpg"
+                     title="Activity 101"
+                     data-description="Shapes and Forms 101 — Variation 2"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)1 JPG.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 105</h4>
+                  <p>1-Point Perspective Drawing (JPG)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)1 JPG.jpg"
+                     title="Activity 105"
+                     data-description="1-Point Perspective Drawing (JPG)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/prefi/Project Updates (One submission per Group).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Project Updates</h4>
+                  <p>One Submission per Group</p>
+                  <a href="assets/img/portfolio/prefi/Project Updates (One submission per Group).jpg"
+                     title="Project Updates"
+                     data-description="One Submission per Group"
+                     data-gallery="portfolio-gallery-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 2.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 2</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 2.jpg"
+                     title="Tinkercad 2"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 102 (Working with Vanishing Points)1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 102</h4>
+                  <p>Working with Vanishing Points — Variation 1</p>
+                  <a href="assets/img/portfolio/premid/Activity 102 (Working with Vanishing Points)1.jpg"
+                     title="Activity 102"
+                     data-description="Working with Vanishing Points — Variation 1"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)1 PSD.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 105</h4>
+                  <p>1-Point Perspective Drawing (PSD)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)1 PSD.jpg"
+                     title="Activity 105"
+                     data-description="1-Point Perspective Drawing (PSD)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 3.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 3</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 3.jpg"
+                     title="Tinkercad 3"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 102 (Working with Vanishing Points).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 102</h4>
+                  <p>Working with Vanishing Points — Variation 2</p>
+                  <a href="assets/img/portfolio/premid/Activity 102 (Working with Vanishing Points).jpg"
+                     title="Activity 102"
+                     data-description="Working with Vanishing Points — Variation 2"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)2 JPG.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 105</h4>
+                  <p>2-Point Perspective Drawing (JPG)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)2 JPG.jpg"
+                     title="Activity 105"
+                     data-description="2-Point Perspective Drawing (JPG)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 4.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 4</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 4.jpg"
+                     title="Tinkercad 4"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 103 (Constructing Basic Forms , Division & Multiplication)1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 103</h4>
+                  <p>Constructing Basic Forms — 1-Point Perspective</p>
+                  <a href="assets/img/portfolio/premid/Activity 103 (Constructing Basic Forms , Division & Multiplication)1.jpg"
+                     title="Activity 103"
+                     data-description="Constructing Basic Forms — 1-Point Perspective"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)2 PSD.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 105</h4>
+                  <p>2-Point Perspective Drawing (PSD)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)2 PSD.jpg"
+                     title="Activity 105"
+                     data-description="2-Point Perspective Drawing (PSD)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 5.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 5</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 5.jpg"
+                     title="Tinkercad 5"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 103 (Constructing Basic Forms , Division & Multiplication)2.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 103</h4>
+                  <p>Constructing Basic Forms — 2-Point Perspective</p>
+                  <a href="assets/img/portfolio/premid/Activity 103 (Constructing Basic Forms , Division & Multiplication)2.jpg"
+                     title="Activity 103"
+                     data-description="Constructing Basic Forms — 2-Point Perspective"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)3 JPG.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 105</h4>
+                  <p>3-Point Perspective Drawing (JPG)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)3 JPG.jpg"
+                     title="Activity 105"
+                     data-description="3-Point Perspective Drawing (JPG)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 6.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 6</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 6.jpg"
+                     title="Tinkercad 6"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 103 (Constructing Basic Forms , Division & Multiplication)3.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 103</h4>
+                  <p>Constructing Basic Forms — 3-Point Perspective</p>
+                  <a href="assets/img/portfolio/premid/Activity 103 (Constructing Basic Forms , Division & Multiplication)3.jpg"
+                     title="Activity 103"
+                     data-description="Constructing Basic Forms — 3-Point Perspective"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)3 PSD.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 105</h4>
+                  <p>3-Point Perspective Drawing (PSD)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 105  Digital Drawing (Perspective Drawing 1,2 and 3)3 PSD.jpg"
+                     title="Activity 105"
+                     data-description="3-Point Perspective Drawing (PSD)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 7.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 7</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 7.jpg"
+                     title="Tinkercad 7"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/Activity 104 (Constructing Basic Forms , Division & Multiplication).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 104</h4>
+                  <p>Constructing Basic Forms — Division &amp; Multiplication</p>
+                  <a href="assets/img/portfolio/premid/Activity 104 (Constructing Basic Forms , Division & Multiplication).jpg"
+                     title="Activity 104"
+                     data-description="Constructing Basic Forms — Division &amp; Multiplication"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 106  Digital Drawing (Modern House).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 106</h4>
+                  <p>Digital Drawing — Modern House (JPG)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 106  Digital Drawing (Modern House).jpg"
+                     title="Activity 106"
+                     data-description="Digital Drawing — Modern House (JPG)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/final/Tinkercad 8.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Tinkercad 8</h4>
+                  <p>Final — 3D Geometric Modelling</p>
+                  <a href="assets/img/portfolio/final/Tinkercad 8.jpg"
+                     title="Tinkercad 8"
+                     data-description="Final — 3D Geometric Modelling"
+                     data-gallery="portfolio-gallery-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PRE-LIM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/premid/PreMid Exam (Last Part).jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PreMid Exam</h4>
+                  <p>Last Part — Test Paper</p>
+                  <a href="assets/img/portfolio/premid/PreMid Exam (Last Part).jpg"
+                     title="PreMid Exam"
+                     data-description="Last Part — Test Paper"
+                     data-gallery="portfolio-gallery-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- MIDTERM -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/midterm/Activity 106  Digital Drawing (Modern House)1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity 106</h4>
+                  <p>Digital Drawing — Modern House (PSD)</p>
+                  <a href="assets/img/portfolio/midterm/Activity 106  Digital Drawing (Modern House)1.jpg"
+                     title="Activity 106"
+                     data-description="Digital Drawing — Modern House (PSD)"
+                     data-gallery="portfolio-gallery-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- End Portfolio Container -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         PORTFOLIO — 1st Year, First Semester
+    ======================================================== -->
+    <section class="portfolio section light-background">
+      <div class="container section-title text-center" data-aos="fade-up">
+        <h1>1𝒔𝒕 𝒚𝒆𝒂𝒓</h1>
+        <h1>𝑭𝒊𝒓𝒔𝒕 𝑺𝒆𝒎𝒆𝒔𝒕𝒆𝒓</h1>
+      </div>
+
+      <div class="container">
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-prelim">PRE-LIM</li>
+            <li data-filter=".filter-midterm">PRE-MID</li>
+            <li data-filter=".filter-prefi">PRE-FINAL</li>
+            <li data-filter=".filter-final">FINAL</li>
+          </ul>
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/LOGO.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>LOGO</h4>
+                  <p>Pre-Lim — Logo Design</p>
+                  <a href="assets/img/portfolio/LOGO.jpg" title="LOGO" data-description="Pre-Lim — Logo Design" data-gallery="portfolio-gallery-1s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/AWAKE FOX.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>MODERN FOX</h4>
+                  <p>Pre-Mid — Awake Fox Illustration</p>
+                  <a href="assets/img/portfolio/AWAKE FOX.jpg" title="Modern Fox" data-description="Pre-Mid — Awake Fox Illustration" data-gallery="portfolio-gallery-1s-premid" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/IMPOSIBLE SHAPE.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>IMPOSSIBLE SHAPE</h4>
+                  <p>Pre-Final — Optical Illusion Design</p>
+                  <a href="assets/img/portfolio/IMPOSIBLE SHAPE.jpg" title="Impossible Shape" data-description="Pre-Final — Optical Illusion Design" data-gallery="portfolio-gallery-1s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/CHILLI CRAB.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>CHILLI CRAB</h4>
+                  <p>Final — Food Illustration</p>
+                  <a href="assets/img/portfolio/CHILLI CRAB.jpg" title="Chilli Crab" data-description="Final — Food Illustration" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/LINE.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>LINE</h4>
+                  <p>Pre-Lim — Line Art Exercise</p>
+                  <a href="assets/img/portfolio/LINE.jpg" title="Line" data-description="Pre-Lim — Line Art Exercise" data-gallery="portfolio-gallery-1s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/SWAN.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>SWAN</h4>
+                  <p>Pre-Mid — Swan Vector Illustration</p>
+                  <a href="assets/img/portfolio/SWAN.jpg" title="Swan" data-description="Pre-Mid — Swan Vector Illustration" data-gallery="portfolio-gallery-1s-premid" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/REDRAW.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>REDRAW</h4>
+                  <p>Pre-Final — Redraw Exercise</p>
+                  <a href="assets/img/portfolio/REDRAW.jpg" title="Redraw" data-description="Pre-Final — Redraw Exercise" data-gallery="portfolio-gallery-1s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/CHICKEN RICE.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>CHICKEN RICE</h4>
+                  <p>Final — Food Illustration</p>
+                  <a href="assets/img/portfolio/CHICKEN RICE.jpg" title="Chicken Rice" data-description="Final — Food Illustration" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/BANNER.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>BANNER</h4>
+                  <p>Pre-Lim — Banner Design</p>
+                  <a href="assets/img/portfolio/BANNER.jpg" title="Banner" data-description="Pre-Lim — Banner Design" data-gallery="portfolio-gallery-1s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/SLEEPING FOX.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>SLEEPING FOX</h4>
+                  <p>Pre-Mid — Sleeping Fox Illustration</p>
+                  <a href="assets/img/portfolio/SLEEPING FOX.jpg" title="Sleeping Fox" data-description="Pre-Mid — Sleeping Fox Illustration" data-gallery="portfolio-gallery-1s-premid" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/PRE-FINAL.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PRE-FINAL</h4>
+                  <p>Pre-Final — Exam Output</p>
+                  <a href="assets/img/portfolio/PRE-FINAL.jpg" title="Pre-Final" data-description="Pre-Final — Exam Output" data-gallery="portfolio-gallery-1s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/FISH HEAD CURRY.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>FISH HEAD CURRY</h4>
+                  <p>Final — Food Illustration</p>
+                  <a href="assets/img/portfolio/FISH HEAD CURRY.jpg" title="Fish Head Curry" data-description="Final — Food Illustration" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/ATTENDANCE.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>ATTENDANCE</h4>
+                  <p>Pre-Lim — Attendance Sheet</p>
+                  <a href="assets/img/portfolio/ATTENDANCE.jpg" title="Attendance" data-description="Pre-Lim — Attendance Sheet" data-gallery="portfolio-gallery-1s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/SHAPES AND FORMS.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>SHAPES AND FORMS</h4>
+                  <p>Pre-Lim — Shapes and Forms Exercise</p>
+                  <a href="assets/img/portfolio/SHAPES AND FORMS.jpg" title="Shapes and Forms" data-description="Pre-Lim — Shapes and Forms Exercise" data-gallery="portfolio-gallery-1s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/MIDTERM.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>MIDTERM</h4>
+                  <p>Pre-Lim — Midterm Output</p>
+                  <a href="assets/img/portfolio/MIDTERM.jpg" title="Midterm" data-description="Pre-Lim — Midterm Output" data-gallery="portfolio-gallery-1s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/PRE-MID.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PRE-MID</h4>
+                  <p>Pre-Mid — Exam Output</p>
+                  <a href="assets/img/portfolio/PRE-MID.jpg" title="Pre-Mid" data-description="Pre-Mid — Exam Output" data-gallery="portfolio-gallery-1s-premid" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/CHILLI CRAB S.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>CHILLI CRAB</h4>
+                  <p>Final — Chilli Crab (Sketch)</p>
+                  <a href="assets/img/portfolio/CHILLI CRAB S.jpg" title="Chilli Crab (Sketch)" data-description="Final — Chilli Crab Sketch" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/CHICKEN RICE S.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>CHICKEN RICE</h4>
+                  <p>Final — Chicken Rice (Sketch)</p>
+                  <a href="assets/img/portfolio/CHICKEN RICE S.jpg" title="Chicken Rice (Sketch)" data-description="Final — Chicken Rice Sketch" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/FISH HEAD CURRY S.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>FISH HEAD CURRY</h4>
+                  <p>Final — Fish Head Curry (Sketch)</p>
+                  <a href="assets/img/portfolio/FISH HEAD CURRY S.jpg" title="Fish Head Curry (Sketch)" data-description="Final — Fish Head Curry Sketch" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/PACKAGE.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PACKAGE</h4>
+                  <p>Final — Product Packaging Design</p>
+                  <a href="assets/img/portfolio/PACKAGE.jpg" title="Package" data-description="Final — Product Packaging Design" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/PACKAGE DIE LINE.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PACKAGE DIE LINE</h4>
+                  <p>Final — Die Line for Packaging</p>
+                  <a href="assets/img/portfolio/PACKAGE DIE LINE.jpg" title="Package Die Line" data-description="Final — Die Line for Packaging" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/PACKAGE STICKER.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PACKAGE STICKER</h4>
+                  <p>Final — Packaging Sticker Design</p>
+                  <a href="assets/img/portfolio/PACKAGE STICKER.jpg" title="Package Sticker" data-description="Final — Packaging Sticker Design" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/LOGO2.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>LOGO FINAL</h4>
+                  <p>Final — Refined Logo Design</p>
+                  <a href="assets/img/portfolio/LOGO2.jpg" title="Logo Final" data-description="Final — Refined Logo Design" data-gallery="portfolio-gallery-1s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- End Portfolio Container -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         PORTFOLIO — 1st Year, Second Semester
+    ======================================================== -->
+    <section class="portfolio section light-background">
+      <div class="container section-title text-center" data-aos="fade-up">
+        <h1>𝑺𝒆𝒄𝒐𝒏𝒅 𝑺𝒆𝒎𝒆𝒔𝒕𝒆𝒓</h1>
+      </div>
+
+      <div class="container">
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">ALL</li>
+            <li data-filter=".filter-prelim">PRE-LIM</li>
+            <li data-filter=".filter-midterm">MIDTERM</li>
+            <li data-filter=".filter-prefi">PRE-FINAL</li>
+            <li data-filter=".filter-final">FINAL</li>
+          </ul>
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/FT  Image Processing 101.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Image Processing 101</h4>
+                  <p>Pre-Lim — Fundamentals of Image Processing</p>
+                  <a href="assets/img/portfolio/FT  Image Processing 101.jpg" title="Image Processing 101" data-description="Pre-Lim — Fundamentals of Image Processing" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/MOVIE POSTER.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Editing 103</h4>
+                  <p>Midterm — My Movie Poster</p>
+                  <a href="assets/img/portfolio/MOVIE POSTER.jpg" title="Editing 103" data-description="Midterm — My Movie Poster" data-gallery="portfolio-gallery-2s-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/photo manipulation.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Photo Manipulation</h4>
+                  <p>Pre-Final — TECH/EDU Theme</p>
+                  <a href="assets/img/portfolio/photo manipulation.jpg" title="Photo Manipulation" data-description="Pre-Final — TECH/EDU Theme" data-gallery="portfolio-gallery-2s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/M-1 SELECTIONS AND CUTOUTS.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Module 1</h4>
+                  <p>Final — Selections and Cutouts</p>
+                  <a href="assets/img/portfolio/M-1 SELECTIONS AND CUTOUTS.jpg" title="Module 1" data-description="Final — Selections and Cutouts" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/101-DEPTH.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Photography 101</h4>
+                  <p>Pre-Lim — Depth of Field</p>
+                  <a href="assets/img/portfolio/101-DEPTH.jpg" title="Activity Photography 101" data-description="Pre-Lim — Depth of Field" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/Editing 104  Landing Page.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Editing 104</h4>
+                  <p>Midterm — My Landing Page</p>
+                  <a href="assets/img/portfolio/Editing 104  Landing Page.jpg" title="Editing 104" data-description="Midterm — My Landing Page" data-gallery="portfolio-gallery-2s-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/New BreakDown.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>BreakDown</h4>
+                  <p>Pre-Final — Design Breakdown</p>
+                  <a href="assets/img/portfolio/New BreakDown.jpg" title="BreakDown" data-description="Pre-Final — Design Breakdown" data-gallery="portfolio-gallery-2s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/M-2 POWER OF GRAY PROJECT.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Module 2</h4>
+                  <p>Final — The Power of Gray</p>
+                  <a href="assets/img/portfolio/M-2 POWER OF GRAY PROJECT.jpg" title="Module 2" data-description="Final — The Power of Gray" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/101-LEADING LINES.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Photography 101</h4>
+                  <p>Pre-Lim — Leading Lines</p>
+                  <a href="assets/img/portfolio/101-LEADING LINES.jpg" title="Activity Photography 101" data-description="Pre-Lim — Leading Lines" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/PS Challenge 101  Blending Text and Image.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PS Challenge 101</h4>
+                  <p>Midterm — Blending Text and Image</p>
+                  <a href="assets/img/portfolio/PS Challenge 101  Blending Text and Image.jpg" title="PS Challenge 101" data-description="Midterm — Blending Text and Image" data-gallery="portfolio-gallery-2s-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/New Logo CCS.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Logo of CCS</h4>
+                  <p>Pre-Final — CCS Department Logo</p>
+                  <a href="assets/img/portfolio/New Logo CCS.jpg" title="Logo of CCS" data-description="Pre-Final — CCS Department Logo" data-gallery="portfolio-gallery-2s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/M-3 LIGHTING EFFECTS PROJECT.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Module 3</h4>
+                  <p>Final — Lighting Effects</p>
+                  <a href="assets/img/portfolio/M-3 LIGHTING EFFECTS PROJECT.jpg" title="Module 3" data-description="Final — Lighting Effects" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/101-RULE OF THIRD.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Photography 101</h4>
+                  <p>Pre-Lim — Rule of Thirds</p>
+                  <a href="assets/img/portfolio/101-RULE OF THIRD.jpg" title="Activity Photography 101" data-description="Pre-Lim — Rule of Thirds" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/PS Challenge 102 Double Exposure.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>PS Challenge 102</h4>
+                  <p>Midterm — Double Exposure</p>
+                  <a href="assets/img/portfolio/PS Challenge 102 Double Exposure.jpg" title="PS Challenge 102" data-description="Midterm — Double Exposure" data-gallery="portfolio-gallery-2s-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/New Temp.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Temp</h4>
+                  <p>Pre-Final — Template Design</p>
+                  <a href="assets/img/portfolio/New Temp.jpg" title="Temp" data-description="Pre-Final — Template Design" data-gallery="portfolio-gallery-2s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/M-4 SPECIAL EFFECTS PROJECT.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Module 4</h4>
+                  <p>Final — Special Effects</p>
+                  <a href="assets/img/portfolio/M-4 SPECIAL EFFECTS PROJECT.jpg" title="Module 4" data-description="Final — Special Effects" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/101-SIZE EQUALS POWER.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Photography 101</h4>
+                  <p>Pre-Lim — Size Equals Power</p>
+                  <a href="assets/img/portfolio/101-SIZE EQUALS POWER.jpg" title="Activity Photography 101" data-description="Pre-Lim — Size Equals Power" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COLOR RANGE.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Color Range</h4>
+                  <p>Midterm — Color Range Selection</p>
+                  <a href="assets/img/portfolio/COLOR RANGE.jpg" title="Color Range" data-description="Midterm — Color Range Selection" data-gallery="portfolio-gallery-2s-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/New OutLine.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Logo OutLine</h4>
+                  <p>Pre-Final — Logo Outline Draft</p>
+                  <a href="assets/img/portfolio/New OutLine.jpg" title="Logo OutLine" data-description="Pre-Final — Logo Outline Draft" data-gallery="portfolio-gallery-2s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COC Develop Designs for a Logo.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>TESDA — COC</h4>
+                  <p>Final — Develop Designs for a Logo</p>
+                  <a href="assets/img/portfolio/COC Develop Designs for a Logo.jpg" title="TESDA — COC" data-description="Final — Develop Designs for a Logo" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/101-SYMMETRY.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Photography 101</h4>
+                  <p>Pre-Lim — Symmetry</p>
+                  <a href="assets/img/portfolio/101-SYMMETRY.jpg" title="Activity Photography 101" data-description="Pre-Lim — Symmetry" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-midterm">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/SELECT SUBJECT.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Select Subject</h4>
+                  <p>Midterm — Subject Selection Technique</p>
+                  <a href="assets/img/portfolio/SELECT SUBJECT.jpg" title="Select Subject" data-description="Midterm — Subject Selection Technique" data-gallery="portfolio-gallery-2s-midterm" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prefi">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/New Social Media Post.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Social Media Post</h4>
+                  <p>Pre-Final — Social Media Graphic</p>
+                  <a href="assets/img/portfolio/New Social Media Post.jpg" title="Social Media Post" data-description="Pre-Final — Social Media Graphic" data-gallery="portfolio-gallery-2s-prefi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COC Developing Design for User Interface.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>TESDA — COC</h4>
+                  <p>Final — Developing Design for User Interface</p>
+                  <a href="assets/img/portfolio/COC Developing Design for User Interface.jpg" title="TESDA — COC" data-description="Final — Developing Design for User Interface" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/102-Fine art Photography.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Framing and Composition 102</h4>
+                  <p>Pre-Lim — Fine Art Photography</p>
+                  <a href="assets/img/portfolio/102-Fine art Photography.jpg" title="Activity Framing and Composition 102" data-description="Pre-Lim — Fine Art Photography" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COC Designing Botth and Product-Window Display.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>TESDA — COC</h4>
+                  <p>Final — Designing Booth and Product/Window Display</p>
+                  <a href="assets/img/portfolio/COC Designing Botth and Product-Window Display.jpg" title="TESDA — COC" data-description="Final — Designing Booth and Product/Window Display" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/102-Food Photography.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Framing and Composition 102</h4>
+                  <p>Pre-Lim — Food Photography</p>
+                  <a href="assets/img/portfolio/102-Food Photography.jpg" title="Activity Framing and Composition 102" data-description="Pre-Lim — Food Photography" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COC Developing Design for Product Packaging.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>TESDA — COC</h4>
+                  <p>Final — Developing Design for Product Packaging</p>
+                  <a href="assets/img/portfolio/COC Developing Design for Product Packaging.jpg" title="TESDA — COC" data-description="Final — Developing Design for Product Packaging" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/102-Landscape.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Framing and Composition 102</h4>
+                  <p>Pre-Lim — Landscape Photography</p>
+                  <a href="assets/img/portfolio/102-Landscape.jpg" title="Activity Framing and Composition 102" data-description="Pre-Lim — Landscape Photography" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COC Developing Designs for Print Media.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>TESDA — COC</h4>
+                  <p>Final — Developing Designs for Print Media</p>
+                  <a href="assets/img/portfolio/COC Developing Designs for Print Media.jpg" title="TESDA — COC" data-description="Final — Developing Designs for Print Media" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/102-Long Exposure.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Framing and Composition 102</h4>
+                  <p>Pre-Lim — Long Exposure Photography</p>
+                  <a href="assets/img/portfolio/102-Long Exposure.jpg" title="Activity Framing and Composition 102" data-description="Pre-Lim — Long Exposure Photography" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COC Developing Designs For User Experrience.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>TESDA — COC</h4>
+                  <p>Final — Developing Designs for User Experience</p>
+                  <a href="assets/img/portfolio/COC Developing Designs For User Experrience.jpg" title="TESDA — COC" data-description="Final — Developing Designs for User Experience" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/102-portrait.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Activity Framing and Composition 102</h4>
+                  <p>Pre-Lim — Portrait Photography</p>
+                  <a href="assets/img/portfolio/102-portrait.jpg" title="Activity Framing and Composition 102" data-description="Pre-Lim — Portrait Photography" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-final">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/COC Introduction to Visual Graphic Design.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>TESDA — COC</h4>
+                  <p>Final — Introduction to Visual Graphic Design</p>
+                  <a href="assets/img/portfolio/COC Introduction to Visual Graphic Design.jpg" title="TESDA — COC" data-description="Final — Introduction to Visual Graphic Design" data-gallery="portfolio-gallery-2s-final" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prelim">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/Editing 101  2x2 Picture.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Editing 101</h4>
+                  <p>Pre-Lim — My 2x2 Picture</p>
+                  <a href="assets/img/portfolio/Editing 101  2x2 Picture.jpg" title="Editing 101" data-description="Pre-Lim — My 2x2 Picture" data-gallery="portfolio-gallery-2s-prelim" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- End Portfolio Container -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="container">
+      <div class="copyright text-center">
+        <p><span>My</span> <strong class="px-1 sitename">Portfolio</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="credits">Designed by Agagad.</div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Skill Bar Animation -->
+  <script>
+    const bars = document.querySelectorAll('.skills .progress-bar');
+    const animateBars = () => {
+      bars.forEach(bar => {
+        const rect = bar.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50 && !bar.dataset.animated) {
+          bar.style.width = bar.getAttribute('aria-valuenow') + '%';
+          bar.dataset.animated = 'true';
+        }
+      });
+    };
+    window.addEventListener('scroll', animateBars);
+    animateBars();
+  </script>
+
+  <!-- Skeleton Image Loader -->
+  <script>
+    document.querySelectorAll('.portfolio-content img').forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => img.classList.add('loaded'));
+        img.addEventListener('error', () => img.classList.add('loaded'));
+      }
+    });
+  </script>
+
+</body>
+</html>
